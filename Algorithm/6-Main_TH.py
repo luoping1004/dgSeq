@@ -1,3 +1,7 @@
+# This program compute the AUC of dgSeq on Thyroid Cancer(TC) and output the
+# average AUC value and a numpy matrix which contains the probabilities of
+# all cross validation genes being disease-associated.
+
 import numpy as np
 import networkx as nx
 import copy
