@@ -1,6 +1,5 @@
-# This program compute the AUC of dgSeq on Breast Cancer (BC) and output a rnk
-# file which contains the top 100 unknown genes and their probability of being
-# BC-associated.
+# This program compute the AUC of dgSeq on Breast Cancer (BC) and output the
+# average AUC values of 100 under sampling.
 
 
 import numpy as np
