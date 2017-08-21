@@ -1,5 +1,6 @@
 # This program compute the AUC of dgSeq on Breast Cancer (BC) and output the
-# average AUC values of 100 under sampling.
+# average AUC value and a numpy matrix which contains the probabilities of
+# all cross validation genes being disease-associated.
 
 
 import numpy as np
@@ -154,54 +155,3 @@ print ('run:',(end - start)/60,'min')
 #save the probabilities for drawing the ROC curve
 print(np.mean(auc100))
 np.save("prob_BC.npy",probS)
-
-#
-#from feature_generate_Func_unknown import *
-#import copy
-#unknown = copy.deepcopy(GeneList)
-#
-#for gene in dg:
-#    unknown.remove(gene)
-#for gene in alldgn:
-#    unknown.remove(gene)
-#X_unknown = ExtractUnknownFeature(Gnorm,Gdiff,unknown)
-#prob_unknown = np.zeros(len(unknown))
-#for t in range(len(unknown)):
-#    prob_unknown[t] = np.exp(np.dot(X_unknown[t],res.x))/(1+np.exp(np.dot(X_unknown[t],res.x)))
-#
-#
-#unknownDic = {}
-#for t in range(len(unknown)):
-#    unknownDic[unknown[t]] = prob_unknown[t]
-#from operator import itemgetter
-#unknownRe = sorted(list(unknownDic.items()), key=itemgetter(1), reverse=True)
-#for i in range(10):
-#    print(unknownRe[i])
-#
-#fuw = open("bc_unknown_gene_list.rnk",'w')
-#for i in range(100):
-#    fuw.write(unknownRe[i][0])
-#    fuw.write('\t')
-#    fuw.write('{}'.format(unknownRe[i][1]))
-#    fuw.write('\n')
-#fuw.close()
-#
-#import copy
-#unknown = copy.deepcopy(GeneList)
-#for gene in dg:
-#    unknown.remove(gene)
-#for gene in alldgn:
-#    unknown.remove(gene)
-#
-#fau = open("All_bc_unknown_gene.txt",'w')
-#for i in range(len(unknown)):
-#    fau.write(unknown[i])
-#    fau.write('\n')
-#fau.close()
-#
-#fdgw = open("breast_cancer_training_genes_endeavor.txt",'w')
-#for i in range(len(dg)):
-#    fdgw.write(dg[i])
-#    fdgw.write('\n')
-#fdgw.close()
-
