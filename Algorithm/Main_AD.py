@@ -10,10 +10,7 @@ from func_minimum import FindMin
 from func_label_graph import LabelGraph
 from sklearn.metrics import roc_auc_score
 
-#fdg = open("Alzheimer_dg_union.txt")
-#fdg = open("50+omim_union.txt")
-#fdg = open("182_Alz_genes.txt")
-fdg = open("dg_top50.txt")
+fdg = open("Alzheimer's_disease_genes.txt")
 dg = fdg.readline()[:-1].split(',')
 fdg.close()
 
@@ -31,49 +28,30 @@ dg = ExcludeGene(dg,GeneList)
 
 #none disease gene based on shortest path in normal disease-gene network
 
-fdgnsp = open("dgn_shortest_path_norm_50.txt")
-#dgn1norm = (fdgnsp.readline()[:-1].split('\t')[1]).split(',')
+fdgnsp = open("dgn_shortest_path_norm_ad.txt")
 dgn2norm = (fdgnsp.readline()[:-1].split('\t')[1]).split(',')
 dgn3norm = (fdgnsp.readline()[:-1].split('\t')[1]).split(',')
-#dgn4norm = (fdgnsp.readline()[:-1].split('\t')[1]).split(',')
-#dgn5norm = (fdgnsp.readline()[:-1].split('\t')[1]).split(',')
-#dgn6norm = (fdgnsp.readline()[:-1].split('\t')[1]).split(',')
 fdgnsp.close()
 
-#fdgnnp = open("C:\\Users\\pil562\\Downloads\\Python\\BIBM2016_special_issue\\TCGA-THCA\\dgn_no_path_norm.txt")
-fdgnnp = open("dgn_no_path_norm_50.txt")
+fdgnnp = open("dgn_no_path_norm_ad.txt")
 dgnnpnorm = fdgnnp.readline()[:-1].split(',')
 fdgnnp.close()
 
-#none disease gene based on shortest path in differential network
+dgnnorm = dgnnpnorm
+dgnnorm = ExcludeGene(dgnnorm,GeneList)
 
-fdgndiff = open("dgn_shortest_path_diff_50.txt")
+#none disease gene based on shortest path in differential network
+fdgndiff = open("dgn_shortest_path_diff_ad.txt")
 dgn3diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
 dgn4diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
 dgn5diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
-#dgn3diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
 dgn100diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
 fdgndiff.close()
 
-dgnnorm = dgnnpnorm
-
-dgnnorm = ExcludeGene(dgnnorm,GeneList)
-#save the dgn
-with open("AD_dgn.txt",'w') as fnw:
-    for i in range(len(dgnnorm)-1):
-        fnw.write(dgnnorm[i])
-        fnw.write(',')
-    fnw.write(dgnnorm[-1])
-    fnw.write('\n')
-    
-
 dgndiff = dgn4diff+dgn5diff+dgn100diff
-
 
 dgnpotential = list(set(dgnnorm).intersection(dgndiff))
 alldgn = list(set(dgnnorm).union(set(dgndiff)))
-
-print(len(dgnpotential))
 
 wMatrix = np.load("Weight_Matrix_Pearson.npy")
 Nn = 5
@@ -104,12 +82,6 @@ for i in range(m):
         if newMatrix[i,j] != 0:
             Gdiff.add_edge(GeneList[i],GeneList[j],weight=newMatrix[i,j])
             
-#print(Gnorm.number_of_nodes())
-#print(Gdiff.number_of_nodes())
-#print(len(dg))
-#print(len(alldgn))
-
-
 # Compute the average AUC
 Round = 100
 auc100 = np.zeros(Round)
