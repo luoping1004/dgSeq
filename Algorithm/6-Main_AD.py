@@ -1,3 +1,7 @@
+# This program compute the AUC of dgSeq on Alzheimer's Disease (AD) and output the
+# average AUC value and a numpy matrix which contains the probabilities of
+# all cross validation genes being disease-associated.
+
 import numpy as np
 import copy
 from func_exclude_gene import ExcludeGene
