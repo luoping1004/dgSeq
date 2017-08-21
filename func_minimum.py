@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.optimize as op
 
+#This function estimate the parameters \mu
 
 def FindMin(Features, Label):
     nodeNum, featureNum = Features.shape
