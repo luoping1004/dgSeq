@@ -1,3 +1,4 @@
+# This function removes the elements which are not in Big from small
 def ExcludeGene(small, Big):
     exclude = []
     for node in small:
