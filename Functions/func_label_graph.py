@@ -1,3 +1,5 @@
+# This function labels the PPI network (G1) and differential network (G2) according to the disease genes in dg
+# and non-disease genes in dgnall. 0.01% of the remaining unknown genes are randomly labeled as 1.
 import numpy as np
 
 def LabelGraph(G1, G2, dg, dgnall):
