@@ -32,7 +32,7 @@ with open("GeneList_BRCA.txt") as fnode:
 
 # This file contains none disease genes based on shortest path in disease-gene
 # network (DGN). The number in each line denotes the length of the shortest path
-with open("dgn_shortest_path_norm.txt") as fdgnsp:
+with open("dgn_shortest_path_norm_bc.txt") as fdgnsp:
     dgn1norm = (fdgnsp.readline()[:-1].split('\t')[1]).split(',')
     dgn2norm = (fdgnsp.readline()[:-1].split('\t')[1]).split(',')
     dgn3norm = (fdgnsp.readline()[:-1].split('\t')[1]).split(',')
@@ -43,12 +43,12 @@ with open("dgn_shortest_path_norm.txt") as fdgnsp:
 
 # This file contains none disease genes in disease-gene network which are not
 # connected to the target disease
-with open("dgn_no_path_norm.txt") as fdgnnp:
+with open("dgn_no_path_norm_bc.txt") as fdgnnp:
     dgnnpnorm = fdgnnp.readline()[:-1].split(',')
 
 # This file contains none disease genes based on the differential network
 # The number in each line also denotes the length of the shortest path
-with open("dgn_shortest_path_diff.txt") as fdgndiff:
+with open("dgn_shortest_path_diff_bc.txt") as fdgndiff:
     dgn3diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
     dgn4diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
     dgn5diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
@@ -70,7 +70,7 @@ dgnpotential = list(set(dgnnorm).intersection(dgndiff))
 alldgn = list(set(dgnnorm).union(set(dgndiff)))
 
 # The correlation difference matrix P
-wMatrix = np.load("Weight_Matrix_BC_new.npy")
+wMatrix = np.load("Weight_Matrix_BC.npy")
 Nn = 5 # Top 5 neighbors are chosen to build the differential network
 m,m = wMatrix.shape
 newMatrix = np.zeros((m,m))
