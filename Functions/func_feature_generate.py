@@ -1,3 +1,4 @@
+# This function extract features for all the genes in AllGene
 import numpy as np
 
 def GetFeature(G1, G2, AllGene, AllLength):
