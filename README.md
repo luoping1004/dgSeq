@@ -12,14 +12,12 @@ Basic Usage
 
 Example
 
-
 Input
 
-The supported input format is as follows:
-
+The input files include the PPI network, the differential network (or the matrix P) and the benchmark disease genes and non-disease genes
 
 Output
-
+Algorithms in the directory "dgSeq/Algorithms/" can compute the AUC values of the prediction as well as the top 100 unknown genes.
 
 
 Please send any questions you might have about the code and/or the algorithm to ping.luo@usask.ca or faw341@mail.usask.ca
