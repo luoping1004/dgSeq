@@ -53,34 +53,8 @@ dgndiff = dgn4diff+dgn5diff+dgn100diff
 dgnpotential = list(set(dgnnorm).intersection(dgndiff))
 alldgn = list(set(dgnnorm).union(set(dgndiff)))
 
-wMatrix = np.load("Weight_Matrix_Pearson.npy")
-Nn = 5
-m,m = wMatrix.shape
-newMatrix = np.zeros((m,m))
-for i in range(m):
-    test = wMatrix[i]
-    temp = np.argpartition(-test, Nn)
-    result_args = temp[:Nn]
-    temp = np.partition(-test, Nn)
-    result = -temp[:Nn]
-    for j in range(Nn):
-        newMatrix[i,result_args[j]] = result[j]
-        newMatrix[result_args[j],i] = result[j]
-
-import networkx as nx
-Gnorm = nx.Graph()
-fppi = open("InBio_Map_Alz.txt")
-for line in fppi:
-    data = line[:-1].split('\t')
-    Gnorm.add_edge(data[0],data[1])
-fppi.close()
-
-Gdiff = nx.Graph()
-Gdiff.add_nodes_from(GeneList)
-for i in range(m):
-    for j in range(i+1,m):
-        if newMatrix[i,j] != 0:
-            Gdiff.add_edge(GeneList[i],GeneList[j],weight=newMatrix[i,j])
+Gnorm = nx.read_gml("ppi_ad.gml.gz")
+Gdiff = nx.read_gml("dif_ad.gml.gz")
             
 # Compute the average AUC
 Round = 100
