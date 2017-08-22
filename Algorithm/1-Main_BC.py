@@ -52,7 +52,6 @@ with open("dgn_shortest_path_diff_bc.txt") as fdgndiff:
     dgn3diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
     dgn4diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
     dgn5diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
-    #dgn6diff = (fdgndiff.readline()[:-1].split('\t')[1]).split(',')
 fdgndiff.close()
 
 # dgnnorm stores non-disease genes collected from DGN
