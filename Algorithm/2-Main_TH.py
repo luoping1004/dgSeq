@@ -58,35 +58,8 @@ dgnpotential = list(set(dgnnorm).intersection(dgndiff))
 # alldgn contains genes whose prior labels are zero
 alldgn = list(set(dgnnorm).union(set(dgndiff)))
 
-wMatrix = np.load("Weight_Matrix_THCA.npy")
-Nn = 5
-m,m = wMatrix.shape
-newMatrix = np.zeros((m,m))
-for i in range(m):
-    test = wMatrix[i]
-    temp = np.argpartition(-test, Nn)
-    result_args = temp[:Nn]
-    temp = np.partition(-test, Nn)
-    result = -temp[:Nn]
-    for j in range(Nn):
-        newMatrix[i,result_args[j]] = result[j]
-        newMatrix[result_args[j],i] = result[j]
-
-Gnorm = nx.Graph()
-fppi = open("InBio_Map_ppi_THCA.txt")
-for line in fppi:
-    data = line[:-1].split('\t')
-    Gnorm.add_edge(data[0],data[1])
-fppi.close()
-
-Gdiff = nx.Graph()
-for i in range(m):
-    for j in range(i+1,m):
-        if newMatrix[i,j] != 0:
-            Gdiff.add_edge(GeneList[i],GeneList[j],weight=newMatrix[i,j])
-            
-print(Gnorm.number_of_nodes())
-print(Gdiff.number_of_nodes())
+Gnorm = nx.read_gml("ppi_tc.gml.gz")
+Gdiff = nx.read_gml("dif_tc.gml.gz")
 
 Round = 100
 auc100 = np.zeros(Round)
