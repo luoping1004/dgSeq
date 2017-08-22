@@ -6,9 +6,6 @@ from func_feature_generate import GetFeature
 from func_minimum import FindMin
 from func_label_graph import LabelGraph
 
-#fdg = open("Alzheimer_dg_union.txt")
-#fdg = open("50+omim_union.txt")
-#fdg = open("182_Alz_genes.txt")
 fdg = open("Alzheimer's_disease_genes.txt")
 dg = fdg.readline()[:-1].split(',')
 fdg.close()
@@ -22,8 +19,6 @@ for line in fnode:
 fnode.close()
 
 dg = ExcludeGene(dg,GeneList)
-
-#print(len(dg))
 
 #none disease gene based on shortest path in normal disease-gene network
 
@@ -47,17 +42,8 @@ fdgndiff.close()
 dgnnorm = dgnnpnorm
 
 dgnnorm = ExcludeGene(dgnnorm,GeneList)
-##save the dgn
-#with open("AD_dgn.txt",'w') as fnw:
-#    for i in range(len(dgnnorm)-1):
-#        fnw.write(dgnnorm[i])
-#        fnw.write(',')
-#    fnw.write(dgnnorm[-1])
-#    fnw.write('\n')
-    
 
 dgndiff = dgn4diff+dgn5diff+dgn100diff
-
 
 dgnpotential = list(set(dgnnorm).intersection(dgndiff))
 alldgn = list(set(dgnnorm).union(set(dgndiff)))
@@ -65,41 +51,6 @@ alldgn = list(set(dgnnorm).union(set(dgndiff)))
 
 Gnorm = nx.read_gml("ppi_ad.gml.gz")
 Gdiff = nx.read_gml("dif_ad.gml.gz")
-
-#wMatrix = np.load("Weight_Matrix_Pearson.npy")
-#Nn = 5
-#m,m = wMatrix.shape
-#newMatrix = np.zeros((m,m))
-#for i in range(m):
-#    test = wMatrix[i]
-#    temp = np.argpartition(-test, Nn)
-#    result_args = temp[:Nn]
-#    temp = np.partition(-test, Nn)
-#    result = -temp[:Nn]
-#    for j in range(Nn):
-#        newMatrix[i,result_args[j]] = result[j]
-#        newMatrix[result_args[j],i] = result[j]
-#
-#import networkx as nx
-#Gnorm = nx.Graph()
-#fppi = open("InBio_Map_Alz.txt")
-#for line in fppi:
-#    data = line[:-1].split('\t')
-#    Gnorm.add_edge(data[0],data[1])
-#fppi.close()
-#
-#Gdiff = nx.Graph()
-#Gdiff.add_nodes_from(GeneList)
-#for i in range(m):
-#    for j in range(i+1,m):
-#        if newMatrix[i,j] != 0:
-#            Gdiff.add_edge(GeneList[i],GeneList[j],weight=newMatrix[i,j])
-            
-print(Gnorm.number_of_nodes())
-print(Gdiff.number_of_nodes())#15056
-#print(len(dg))
-#print(len(alldgn))
-
 
 # Compute the average AUC
 
@@ -112,7 +63,7 @@ for gene in alldgn:
     unknown.remove(gene)
 
    
-Round = 1000
+Round = 100
 prob_unknown = np.zeros((len(unknown), Round))
 dgLength = len(dg)
 y = np.concatenate((np.ones(dgLength),np.zeros(dgLength)))
@@ -155,7 +106,7 @@ for i in range(len(unknown)):
 from operator import itemgetter
 unknownRe = sorted(list(unknownDic.items()), key=itemgetter(1), reverse=True)
 
-fuw = open("Alz_unknown_gene_list_1000.rnk",'w')
+fuw = open("ad_unknown_gene_list.rnk",'w')
 for i in range(100):
     fuw.write(unknownRe[i][0])
     fuw.write('\t')
