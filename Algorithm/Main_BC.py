@@ -69,6 +69,9 @@ dgnpotential = list(set(dgnnorm).intersection(dgndiff))
 # alldgn contains genes whose prior labels are zero
 alldgn = list(set(dgnnorm).union(set(dgndiff)))
 
+# The codes in the following comment section import the PPI network and the generate the differential network. Since the weight matrix P
+# is too large to upload, we directly load the resulting PPI networks into the program.
+"""
 # The correlation difference matrix P
 wMatrix = np.load("Weight_Matrix_BC.npy")
 Nn = 5 # Top 5 neighbors are chosen to build the differential network
@@ -84,6 +87,7 @@ for i in range(m):
         newMatrix[i,result_args[j]] = result[j]
         newMatrix[result_args[j],i] = result[j]
 
+
 # The PPI network
 Gnorm = nx.Graph()
 with open("InBio_Map_ppi_BC.txt") as fppi:
@@ -96,7 +100,11 @@ for i in range(m):
     for j in range(i+1,m):
         if newMatrix[i,j] != 0:
             Gdiff.add_edge(GeneList[i],GeneList[j],weight=newMatrix[i,j])
-            
+"""
+
+Gnorm = nx.read_gml("ppi_bc.gml.gz")
+Gdiff = nx.read_gml("dif_bc.gml.gz")
+
 # Compute the average AUC
 Round = 100
 auc100 = np.zeros(Round)
