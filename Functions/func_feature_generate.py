@@ -14,8 +14,8 @@ def GetFeature(G1, G2, AllGene, AllLength):
             elif G1.node[nei]['label'] == 0:
                 zero+=1
         X[k][0] = 1
-        X[k][1] = one
-        X[k][2] = zero
+        X[k][1] = zero
+        X[k][2] = one
         one = 0
         zero = 0
         neighbor = G2.neighbors(node)
@@ -25,7 +25,7 @@ def GetFeature(G1, G2, AllGene, AllLength):
             elif G2.node[nei]['label'] == 0:
                 zero+=1
         
-        X[k][3] = one
-        X[k][4] = zero
+        X[k][3] = zero
+        X[k][4] = one
 
     return X
