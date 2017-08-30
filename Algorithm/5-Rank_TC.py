@@ -111,11 +111,9 @@ for i in range(len(unknown)):
 from operator import itemgetter
 unknownRe = sorted(list(unknownDic.items()), key=itemgetter(1), reverse=True)
 
-fuw = open("tc_unknown_gene_list.rnk",'w')
+fuw = open("TC_top100.txt",'w')
 for i in range(100):
     fuw.write(unknownRe[i][0])
-    fuw.write('\t')
-    fuw.write('{}'.format(unknownRe[i][1]))
     fuw.write('\n')
 fuw.close()
 
