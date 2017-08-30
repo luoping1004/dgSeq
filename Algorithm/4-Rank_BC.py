@@ -122,8 +122,6 @@ unknownRe = sorted(list(unknownDic.items()), key=itemgetter(1), reverse=True)
 fuw = open("bc_unknown_gene_list.rnk",'w')
 for i in range(100):
     fuw.write(unknownRe[i][0])
-    fuw.write('\t')
-    fuw.write('{}'.format(unknownRe[i][1]))
     fuw.write('\n')
 fuw.close()
 
