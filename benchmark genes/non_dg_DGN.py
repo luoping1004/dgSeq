@@ -1,12 +1,11 @@
 import networkx as nx
 G = nx.Graph()
 dgDic = {}
-fmap = open("D:/Data/OMIM/OMIM_v0.9.txt")
-fmap.readline()
+fmap = open("D:/Data/OMIM/OMIM_v1.0.txt")
 
 for line in fmap:
     data = line[:-1].split('\t')
-    gene = data[1].split(', ')
+    gene = data[1].split(',')
     if data[0] in dgDic:
         dgDic[data[0]] = list(set(dgDic[data[0]]).union(set(gene)))
     else:        
@@ -79,19 +78,3 @@ for i in range(len(nopath)-1):
 fnop.write(nopath[-1])
 fnop.write('\n')
 fnop.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
