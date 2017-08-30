@@ -119,7 +119,7 @@ for i in range(len(unknown)):
 from operator import itemgetter
 unknownRe = sorted(list(unknownDic.items()), key=itemgetter(1), reverse=True)
 
-fuw = open("bc_unknown_gene_list.rnk",'w')
+fuw = open("BC_top100.txt",'w')
 for i in range(100):
     fuw.write(unknownRe[i][0])
     fuw.write('\n')
