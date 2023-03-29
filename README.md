@@ -7,6 +7,7 @@ Disease Gene Prediction by Integrating PPI Networks, Clinical RNA-Seq Data and O
 Ping Luo, Li-Ping Tian, Jishou Ruan, and Fang-Xiang Wu
 
 IEEE/ACM Transactions on Computational Biology and Bioinformatics, Volume: 16, Issue: 1, 01 Jan.-Feb. 2019
+
 DOI: 10.1109/TCBB.2017.2770120
 
 dgSeq predicts disease genes from a PPI network and a differential network constructed by RNA-Seq data.
