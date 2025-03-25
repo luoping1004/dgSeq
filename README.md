@@ -20,4 +20,4 @@ Output
 Algorithms in the directory "dgSeq/Algorithms/" can compute the AUC values of the prediction as well as the top 100 unknown genes.
 
 
-Please send any questions to ping.luo@uhn.ca or faw341@mail.usask.ca
+Please send any questions to ping.luo@uhn.ca or faw341@mail.usask.ca or ping.luo@algomau.ca
